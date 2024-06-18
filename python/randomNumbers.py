@@ -6,10 +6,10 @@ import time
 i = 0
 
 while True:
-    num = random.randint(0,999) #this is how we make a random number
-    print(num, end = " ")
-    time.sleep(0.01)
+    num = random.randint(0,1) #this is how we make a random number
+    print(num, end = " ") #we can specify end so it doesnt make a new line
+    time.sleep(0.005) #delay between each number
     i += 1
-    if i == 50:
+    if i == 100:
         print()
         i = 0
