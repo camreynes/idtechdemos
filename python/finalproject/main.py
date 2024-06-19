@@ -9,6 +9,9 @@ screen = pygame.display.set_mode((width, height))
 
 bg_color = (45,76,180) #making background color
 
+sprite = pygame.image.load('images/slush.png')
+spriteX = 10 #this is the initial x position of the sprite
+
 #MAIN GAME LOOP
 while True:
     #this for loop gets every input from the user and every event in the game
