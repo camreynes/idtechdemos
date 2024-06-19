@@ -4,7 +4,7 @@ import pygame, sys
 pygame.init()
 
 # set up variables for the screen size in pixels
-size = width, height = 640, 480
+size = width, height = 1000, 200
 
 # initialize a window with the screen size you set
 screen = pygame.display.set_mode(size)
@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(size)
 # create a clock, which will be used to control the program's frame rate
 clock = pygame.time.Clock()
 
-# create variables to store location and size of a shape to draw on screen.!
+# create variables to store location and size of a shape to draw on screen.
 shape_position = (width / 2, height / 2)
 shape_size = (100, 100)
 
