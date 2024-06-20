@@ -12,16 +12,17 @@ bg_color = (255,255,255) #making background color
 
 spriteX = 10 #this is the initial x position of the sprite
 spriteY = 40 #initial y position
-spriteWidth = 640
-spriteHeight = 640
+spriteWidth = 100
+spriteHeight = 100
 sprite = pygame.image.load('images/slush.png')
-enemy_image = pygame.image.load('images/enemy.png')
+enemy_image = pygame.image.load("images/enemy.png")
 
 sprite = pygame.transform.scale(sprite, (spriteWidth, spriteHeight))
-enemy_image = pygame.transform.scale(enemy_image, (500,500))
+enemy_image = pygame.transform.scale(enemy_image, (100,100))
 spriteColor = (90, 231, 125) #Green
 
-spriteObject = pygame.Rect(spriteX, spriteY, spriteWidth, spriteHeight)
+spriteObject = pygame.Rect(spriteX, spriteY, 40, 40)
+enemyObject = pygame.Rect(spriteX+200, spriteY+200, 40,40)
 
 speed = 10
 
@@ -30,6 +31,12 @@ fps = 24
 
 def draw_sprites():
     screen.blit(sprite,spriteObject)
+
+def draw_enemies():
+    screen.blit(enemy_image,enemyObject)
+    if spriteObject.colliderect(enemyObject): #these two lines of code will detect collision and end the program
+                                              #if the enemies collide
+        sys.exit()
 
 #MAIN GAME LOOP
 while True:
@@ -53,5 +60,6 @@ while True:
             #we use sys.exit() to close the window
     screen.fill(bg_color)
     draw_sprites()
+    draw_enemies()
 
     pygame.display.flip() #updates screen
