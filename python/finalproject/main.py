@@ -3,9 +3,13 @@ from pygame import key
 
 pygame.init() #initialize pygame
 
+score = 0
+
 width = 800
 height = 800
 screen = pygame.display.set_mode((width, height))
+score_ui = pygame.Rect(0,0,width,50)
+
 #making width and height of screen
 
 bg_color = (255,255,255) #making background color
@@ -16,13 +20,17 @@ spriteWidth = 100
 spriteHeight = 100
 sprite = pygame.image.load('images/slush.png')
 enemy_image = pygame.image.load("images/enemy.png")
+coin = pygame.image.load("images/coin.png")
 
 sprite = pygame.transform.scale(sprite, (spriteWidth, spriteHeight))
 enemy_image = pygame.transform.scale(enemy_image, (100,100))
+coin = pygame.transform.scale(coin,(80,80))
 spriteColor = (90, 231, 125) #Green
 
 spriteObject = pygame.Rect(spriteX, spriteY, 40, 40)
 enemyObject = pygame.Rect(spriteX+200, spriteY+200, 40,40)
+coinObject = [pygame.Rect(300,300,40,40),
+              pygame.Rect(400,400,40,40)]
 
 speed = 10
 
@@ -31,6 +39,15 @@ fps = 24
 
 def draw_sprites():
     screen.blit(sprite,spriteObject)
+    screen.blit(coin,coinObject[0])
+    screen.blit(coin, coinObject[1])
+
+    pygame.draw.rect(screen,(0,0,0),score_ui)
+    draw_text(("Score: " + str(score)), pygame.font.SysFont("",30),(255,255,255),10,10)
+
+def draw_text(text,font,color,x,y):
+    image = font.render(text,True,color)
+    screen.blit(image,(x,y))
 
 def draw_enemies():
     screen.blit(enemy_image,enemyObject)
@@ -59,6 +76,7 @@ while True:
             #this if condition checks if the user is trying to quit the program and if they are
             #we use sys.exit() to close the window
     screen.fill(bg_color)
+    # pygame.draw.rect(screen, (0, 0, 255), spriteObject) #HOW TO DRAW HITBOX
     draw_sprites()
     draw_enemies()
 
