@@ -22,6 +22,7 @@ sprite = pygame.image.load('images/slush.png')
 enemy_image = pygame.image.load("images/enemy.png")
 coin = pygame.image.load("images/coin.png")
 
+
 sprite = pygame.transform.scale(sprite, (spriteWidth, spriteHeight))
 enemy_image = pygame.transform.scale(enemy_image, (100,100))
 coin = pygame.transform.scale(coin,(80,80))
@@ -31,6 +32,7 @@ spriteObject = pygame.Rect(spriteX, spriteY, 40, 40)
 enemyObject = pygame.Rect(spriteX+200, spriteY+200, 40,40)
 coinObject = [pygame.Rect(300,300,40,40),
               pygame.Rect(400,400,40,40)]
+coinVis = [True, True]
 
 speed = 10
 
@@ -39,8 +41,10 @@ fps = 24
 
 def draw_sprites():
     screen.blit(sprite,spriteObject)
-    screen.blit(coin,coinObject[0])
-    screen.blit(coin, coinObject[1])
+    if (coinVis[0]):
+        screen.blit(coin,coinObject[0])
+    if (coinVis[1]):
+        screen.blit(coin, coinObject[1])
 
     pygame.draw.rect(screen,(0,0,0),score_ui)
     draw_text(("Score: " + str(score)), pygame.font.SysFont("",30),(255,255,255),10,10)
@@ -48,6 +52,11 @@ def draw_sprites():
 def draw_text(text,font,color,x,y):
     image = font.render(text,True,color)
     screen.blit(image,(x,y))
+
+    global score
+    for i, coins in enumerate(coinObject):
+        if coins.colliderect(spriteObject): #if we touch a coin
+            coinVis[i] = False
 
 def draw_enemies():
     screen.blit(enemy_image,enemyObject)
